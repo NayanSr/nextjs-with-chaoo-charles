@@ -25,7 +25,9 @@ export default function RootLayout({
       <body className={`${playpenSans.className} text-slate-700`}>
         <div className="flex flex-col min-h-screen ">
           <NavBar />
-          <main className="bg-neutral-200 flex-grow">{children}</main>
+          <main className="bg-amber-100 text-orange-700 flex-grow">
+            {children}
+          </main>
           <Footer />
         </div>
       </body>
