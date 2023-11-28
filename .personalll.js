@@ -10,6 +10,7 @@
 5. Working/styling on navigation _43:00
 6. Install react icon  _npm install react-icons --save
 7. Working/styling on footer _53:00 (react icon, current year, spectal symbole)
+8. Creating home banner. Setting image using next Image component** 57:00
 
 
 
