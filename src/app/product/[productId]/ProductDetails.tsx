@@ -1,29 +1,30 @@
 "use client";
 
-// import { SetColor } from "@/app/components/products/SetColor";
+import { SetColor } from "@/app/components/products/SetColor";
+import { SetQuantity } from "@/app/components/products/SetQuantity";
 import { Rating } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 interface ProductDetailsChildrenProps {
   product: any;
 }
 
-// export type CardProductType = {
-//   id: string;
-//   name: string;
-//   description: string;
-//   category: string;
-//   brand: string;
-//   selectedImg: SelectedImageType;
-//   quantity: number;
-//   price: number;
-// };
+export type CartProductType = {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  brand: string;
+  selectedImg: SelectedImageType;
+  quantity: number;
+  price: number;
+};
 
-// export type SelectedImageType = {
-//   color: string;
-//   colorCode: string;
-//   image: string;
-// };
+export type SelectedImageType = {
+  color: string;
+  colorCode: string;
+  image: string;
+};
 
 const Horizontal = () => {
   return <hr className="w-[80%] border border-green-800 my-2" />;
@@ -33,22 +34,50 @@ const Horizontal = () => {
 const ProductDetailsChildren: React.FC<ProductDetailsChildrenProps> = ({
   product,
 }) => {
-  // const [cardProduct, setCardProduct] = useState<CardProductType>({
-  //   id: product.id,
-  //   name: product.name,
-  //   description: product.description,
-  //   category: product.category,
-  //   brand: product.brand,
-  //   selectedImg: { ...product.images[0] },
-  //   quantity: 1,
-  //   price: product.price,
-  // });
+  const [cartProduct, setCartProduct] = useState<CartProductType>({
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    category: product.category,
+    brand: product.brand,
+    selectedImg: { ...product.images[0] },
+    quantity: 1,
+    price: product.price,
+  });
 
-  // const handleColorSelect=()=>{}
+  //!...?
+  const handleColorSelect = useCallback(
+    (value: SelectedImageType) => {
+      setCartProduct((prev) => {
+        return { ...prev, selectedImg: value };
+      });
+    },
+    [cartProduct.selectedImg]
+  );
+
+  // console.log(cartProduct);
 
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product.reviews.length;
+
+  const handleQtyIncrease = useCallback(() => {
+    if (cartProduct.quantity > 98) {
+      return;
+    }
+    setCartProduct((prev) => {
+      return { ...prev, quantity: prev.quantity + 1 };
+    });
+  }, [cartProduct]);
+
+  const handleQtyDecrease = useCallback(() => {
+    if (cartProduct.quantity === 1) {
+      return;
+    }
+    setCartProduct((prev) => {
+      return { ...prev, quantity: prev.quantity - 1 };
+    });
+  }, [cartProduct]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -75,9 +104,18 @@ const ProductDetailsChildren: React.FC<ProductDetailsChildrenProps> = ({
         </div>
         <Horizontal />
         <div>color</div>
-        {/* <SetColor images={product.images} cardProduct={cardProduct} handleColorSelect={handleColorSelect} /> */}
+        <SetColor
+          images={product.images}
+          cartProduct={cartProduct}
+          handleColorSelect={handleColorSelect}
+        />
         <Horizontal />
-        <div>Quantity:</div>
+        <SetQuantity
+          // cartCounter={false}
+          cartProduct={cartProduct}
+          handleQtyDecrease={handleQtyDecrease}
+          handleQtyIncrease={handleQtyIncrease}
+        />
         <Horizontal />
         <div>Add To Cart</div>
       </div>
