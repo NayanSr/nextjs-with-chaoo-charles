@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { truncateText } from "../../../../utils/truncateText";
 import { formatePrice } from "../../../../utils/formatePrice";
 import Rating from "@mui/material/Rating";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   data: any;
@@ -12,8 +15,13 @@ const ProductCart: React.FC<ProductCardProps> = ({ data }) => {
     data.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     data.reviews.length;
 
+  const router = useRouter();
+
   return (
-    <div className="my-2 col-span-1 cursor-pointer border-4  border-orange-400 bg-neutral-300 rounded-md p-2 transition hover:scale-105 text-center text-sm">
+    <div
+      onClick={() => router.push(`/product/${data.id}`)}
+      className="my-2 col-span-1 cursor-pointer border-4  border-orange-400 bg-neutral-300 rounded-md p-2 transition hover:scale-105 text-center text-sm"
+    >
       <div className="flex flex-col items-start w-full gap-1">
         <div className="relative w-full aspect-square overflow-hidden">
           <Image
