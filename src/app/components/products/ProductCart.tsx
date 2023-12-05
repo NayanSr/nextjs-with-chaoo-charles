@@ -10,6 +10,7 @@ interface ProductCardProps {
   data: any;
 }
 
+//! main file
 const ProductCart: React.FC<ProductCardProps> = ({ data }) => {
   const productRating =
     data.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
