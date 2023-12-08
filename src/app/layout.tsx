@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import NavBar from "./components/nav/NavBar";
 import Footer from "./components/footer/Footer";
+import { CartProvider } from "../../providers/CartProvider";
 
 // const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -23,13 +24,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playpenSans.className} text-slate-700`}>
-        <div className="flex flex-col min-h-screen ">
-          <NavBar />
-          <main className="bg-amber-100 text-orange-700 flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <CartProvider>
+          <div className="flex flex-col min-h-screen ">
+            <NavBar />
+            <main className="bg-amber-100 text-orange-700 flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </CartProvider>
       </body>
     </html>
   );
