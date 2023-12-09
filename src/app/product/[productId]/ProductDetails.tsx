@@ -37,8 +37,8 @@ const Horizontal = () => {
 const ProductDetailsChildren: React.FC<ProductDetailsChildrenProps> = ({
   product,
 }) => {
-  const { cartTotalQty } = useCart();
-
+  //* use context
+  const { handleAddProductToCart, cartProducts } = useCart();
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
     name: product.name,
@@ -60,7 +60,7 @@ const ProductDetailsChildren: React.FC<ProductDetailsChildrenProps> = ({
     [cartProduct.selectedImg]
   );
 
-  console.log(cartTotalQty);
+  console.log("productsc: ", cartProducts);
 
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
@@ -127,7 +127,10 @@ const ProductDetailsChildren: React.FC<ProductDetailsChildrenProps> = ({
         />
         <Horizontal />
         <div className="max-w-[300px]">
-          <Button label={"Add To Cart"} onClick={() => {}} />
+          <Button
+            label={"Add To Cart"}
+            onClick={() => handleAddProductToCart(cartProduct)}
+          />
         </div>
       </div>
     </div>
