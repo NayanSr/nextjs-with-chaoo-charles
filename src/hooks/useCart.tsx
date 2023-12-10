@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { CartProductType } from "../app/product/[productId]/ProductDetails";
 
 type CartContextType = {
@@ -19,6 +25,15 @@ export const CartContextProvider = (props: Props) => {
     null
   );
 
+  //* Set local storage data in cartProducts when this page load
+  useEffect(() => {
+    const cartProductsFromLSInJSON: any = localStorage.getItem("eShopCartItem");
+    const cartProductsFromLS: CartProductType[] | null = JSON.parse(
+      cartProductsFromLSInJSON
+    );
+    setCartProducts(cartProductsFromLS);
+  }, []);
+
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     setCartProducts((prev) => {
       let updatedCart;
@@ -27,6 +42,8 @@ export const CartContextProvider = (props: Props) => {
       } else {
         updatedCart = [product];
       }
+      //* Save clicked product in local storagr
+      localStorage.setItem("eShopCartItem", JSON.stringify(updatedCart));
       return updatedCart;
     });
   }, []);
