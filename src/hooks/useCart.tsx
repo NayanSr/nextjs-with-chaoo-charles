@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { CartProductType } from "../app/product/[productId]/ProductDetails";
+import { toast } from "react-hot-toast";
 
 type CartContextType = {
   cartTotalQty: number;
@@ -13,14 +14,15 @@ type CartContextType = {
   handleAddProductToCart: (product: CartProductType) => void;
 };
 
-export const CartContext = createContext<CartContextType | null>(null);
+// export const CartContext = createContext<CartContextType | null>(null);
+const CartContext = createContext<CartContextType | null>(null);
 
 interface Props {
   [propName: string]: any;
 }
 
 export const CartContextProvider = (props: Props) => {
-  const [cartTotalQty, setCartTotalQty] = useState(10);
+  const [cartTotalQty, setCartTotalQty] = useState(0);
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(
     null
   );
@@ -42,8 +44,12 @@ export const CartContextProvider = (props: Props) => {
       } else {
         updatedCart = [product];
       }
+
+      toast.success("Product added successfully in Cart");
+
       //* Save clicked product in local storagr
       localStorage.setItem("eShopCartItem", JSON.stringify(updatedCart));
+
       return updatedCart;
     });
   }, []);
