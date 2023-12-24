@@ -14,9 +14,10 @@ export default function ProductDetailsParent({ params }: { params: IParams }) {
     <div className="p-4">
       <Container>
         <ProductDetailsChildren product={product} />
+        {/*//? Product description part */}
         <div className="flex flex-col mt-20 gap-4">
+          {/*//? Product reviews part */}
           <div>Add Rating</div>
-
           <ListRating product={product} />
         </div>
       </Container>

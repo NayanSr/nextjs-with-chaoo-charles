@@ -1,5 +1,5 @@
 import { CartProductType } from "@/app/product/[productId]/ProductDetails";
-import { dividerClasses } from "@mui/material";
+// import { dividerClasses } from "@mui/material";
 
 interface SetQtyProps {
   cartCounter?: boolean;
@@ -22,11 +22,11 @@ export const SetQuantity: React.FC<SetQtyProps> = ({
       {cartCounter ? null : <div className="font-semibold">QUANTITY: </div>}
       <div className="flex gap-4 items-center justify-center text-base">
         <button className={btnStyle} onClick={handleQtyDecrease}>
-          ➖
+          ▽
         </button>
         <div>{cartProduct.quantity}</div>
         <button className={btnStyle} onClick={handleQtyIncrease}>
-          ➕
+          △
         </button>
       </div>
     </div>

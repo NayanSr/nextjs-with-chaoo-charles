@@ -129,6 +129,7 @@ const ProductDetailsChildren: React.FC<ProductDetailsChildrenProps> = ({
           {product.inStock ? "In Stock" : "Out of Stock"}
         </div>
         <Horizontal />
+        {/*//* Conditional part */}
         {isProductInCart ? (
           <>
             <p className="mb-2 text-slate-600 flex items-center gap-2">
