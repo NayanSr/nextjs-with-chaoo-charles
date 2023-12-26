@@ -8,6 +8,7 @@ import { useCart } from "@/hooks/useCart";
 import { Rating } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { MdCheckCircle } from "react-icons/md";
 
 interface ProductDetailsChildrenProps {
@@ -85,6 +86,7 @@ const ProductDetailsChildren: React.FC<ProductDetailsChildrenProps> = ({
 
   const handleQtyIncrease = useCallback(() => {
     if (cartProduct.quantity > 98) {
+      toast.error("Maximum quantity Added");
       return;
     }
     setCartProduct((prev) => {
@@ -94,6 +96,8 @@ const ProductDetailsChildren: React.FC<ProductDetailsChildrenProps> = ({
 
   const handleQtyDecrease = useCallback(() => {
     if (cartProduct.quantity === 1) {
+      toast.error("Quantity Should be atlest One");
+
       return;
     }
     setCartProduct((prev) => {

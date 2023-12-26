@@ -6,7 +6,7 @@ import { Button } from "../components/Button";
 import ItemContent from "./ItemContent";
 
 export default function CartClient() {
-  const { cartProducts } = useCart();
+  const { cartProducts, handleClearCart } = useCart();
 
   if (!cartProducts || cartProducts.length === 0) {
     return (
@@ -44,7 +44,7 @@ export default function CartClient() {
 
       <div className="flex justify-between gap-4 border-t-[2.5px] border-orange-900 mt-2">
         <div className="max-w-[150px] mt-4">
-          <Button label="Clear Cart" outline small onClick={() => {}} />
+          <Button label="Clear Cart" outline small onClick={handleClearCart} />
         </div>
         <div className="flex flex-col gap-2 items-start text-sm">
           <div className="flex justify-between mt-2 w-full text-base font-semibold ">
