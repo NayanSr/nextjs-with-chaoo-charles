@@ -4,9 +4,10 @@ import { MdArrowBack } from "react-icons/md";
 import { Heading } from "../components/Heading";
 import { Button } from "../components/Button";
 import ItemContent from "./ItemContent";
+import { formatePrice } from "../../../utils/formatePrice";
 
 export default function CartClient() {
-  const { cartProducts, handleClearCart } = useCart();
+  const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
 
   if (!cartProducts || cartProducts.length === 0) {
     return (
@@ -49,7 +50,7 @@ export default function CartClient() {
         <div className="flex flex-col gap-2 items-start text-sm">
           <div className="flex justify-between mt-2 w-full text-base font-semibold ">
             <span>Subtotal</span>
-            <span>$1,000</span>
+            <span>{formatePrice(cartTotalAmount)}</span>
           </div>
 
           <p>Taxes and Shipping will calculated when checkout</p>
