@@ -1,6 +1,7 @@
 import { Montserrat_Alternates } from "next/font/google";
 import Link from "next/link";
 import Container from "../Container";
+import CartCount from "./CartCount";
 
 const montserratAlternates = Montserrat_Alternates({
   subsets: ["latin"],
@@ -22,7 +23,7 @@ const NavBar = () => {
             </Link>
             <div className="hidden md:block">Search</div>
             <div className="flex items-center gap-8 md:gap-12">
-              <div>CartCounter</div>
+              <CartCount />
               <div>Usermanu</div>
             </div>
           </div>
